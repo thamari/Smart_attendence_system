@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Face Recognition Attendance</title>
+</head>
+<body>
+    <h1>Face Recognition Attendance System</h1>
+    <form action="{{ url_for('upload_image') }}" method="post" enctype="multipart/form-data">
+        <input type="file" name="file" accept="image/*" required>
+        <input type="submit" value="Upload Image">
+    </form>
+
+    <a href="{{ url_for('attendance_status') }}">View Attendance Records</a>
+
+    {% if label %}
+        <h2>Recognized as: {{ label }}</h2>
+        <img src="{{ url_for('static', filename=image_url) }}" alt="Uploaded Image" style="max-width: 500px;">
+    {% elif error %}
+        <h2>{{ error }}</h2>
+    {% endif %}
+</body>
+</html>
